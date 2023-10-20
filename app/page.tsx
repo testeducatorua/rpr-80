@@ -1,11 +1,25 @@
 import Image from 'next/image'
-import { CustomFilter, Hero, Searchbar } from '@/components'
+import { CustomFilter, Hero, Searchbar, CarCard } from '@/components'
+import { fetchCars } from '@/utils'
+import { HomeProps } from "@/types";
 
-export default function Home() {
+import { fuels, yearsOfProduction } from "@/constants";
+
+export default async function Home({ searchParams }: HomeProps) {
+    const allCars = await fetchCars({
+      manufacturer: searchParams.manufacturer || "",
+      year: searchParams.year || 2023,
+      fuel: searchParams.fuel || "",
+      limit: searchParams.limit || 12,
+      model: searchParams.model || "",
+    });
+  
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+
   return (
     <main className="overflow-hidden">
       <Hero />
-      
+
       <div className='mt-12 padding-x padding-y max-width' id='discover'>
 
         <div className='home__text-container'>
@@ -19,9 +33,35 @@ export default function Home() {
           <div className='home__filter-container'>
             {/* <CustomFilter title='fuel'  />
             <CustomFilter title='year' /> */}
+             {/* <CustomFilter title='fuel' options={fuels} />
+            <CustomFilter title='year' options={yearsOfProduction} /> */}
           </div>
         </div>
-      </div>  
+
+        {
+          !isDataEmpty
+            ? (
+              <section>
+                {/* Маємо машини */}
+                <div className="home__cars-wrapper">
+                  {allCars?.map((car) => (
+                    <CarCard car = {car}/>
+                  ))}
+                </div>
+              </section>
+            )
+              : (
+                <div className='home__error-container'>
+                  <h2 className='text-black text-xl font-bold'>
+                    Результатів не знайдено
+                  </h2>
+                  <p>{allCars?.message}</p>
+                </div>
+              )
+        }
+
+
+      </div>
     </main>
   )
 }

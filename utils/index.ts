@@ -38,15 +38,15 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   return `${url}`;
 } 
 
-// export const updateSearchParams = (type: string, value: string) => {
-//   // Отримуємо поточні параметри пошуку URL
-//   const searchParams = new URLSearchParams(window.location.search);
+export const updateSearchParams = (type: string, value: string) => {
+  // Отримуємо поточні параметри пошуку URL
+  const searchParams = new URLSearchParams(window.location.search);
 
-//   // Встановлюємо зазначений параметр пошуку на задане значення
-//   searchParams.set(type, value);
+  // Встановлюємо зазначений параметр пошуку на задане значення
+  searchParams.set(type, value);
 
-//   // Формуємо новий шлях з оновленими параметрами пошуку
-//   const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+  // Формуємо новий шлях з оновленими параметрами пошуку
+  const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
 
-//   return newPathname;
-// };
+  return newPathname;
+};

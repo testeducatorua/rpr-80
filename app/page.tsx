@@ -1,10 +1,9 @@
 import Image from 'next/image'
-// import { CustomFilter, Hero, Searchbar, CarCard } from '@/components'
-import { Hero, Searchbar, CarCard } from '@/components'
+import { CustomFilter, Hero, Searchbar, CarCard } from '@/components'
 import { fetchCars } from '@/utils'
 import { HomeProps } from "@/types";
 
-// import { fuels, yearsOfProduction } from "@/constants";
+import { fuels, yearsOfProduction } from "@/constants";
 
 export default async function Home({ searchParams }: HomeProps) {
     const allCars = await fetchCars({
@@ -32,10 +31,9 @@ export default async function Home({ searchParams }: HomeProps) {
           <Searchbar />
 
           <div className='home__filter-container'>
-            {/* <CustomFilter title='fuel'  />
-            <CustomFilter title='year' /> */}
-             {/* <CustomFilter title='fuel' options={fuels} />
-            <CustomFilter title='year' options={yearsOfProduction} /> */}
+           
+             <CustomFilter title='fuel' options={fuels} />
+            <CustomFilter title='year' options={yearsOfProduction} />
           </div>
         </div>
 

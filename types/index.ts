@@ -52,3 +52,8 @@ export interface OptionProps {
     title: string;
     value: string;
 }
+
+export interface ShowMoreProps {
+    pageNumber: number; // Номер сторінки
+    isNext: boolean;    // Чи є наступна сторінка
+  }
